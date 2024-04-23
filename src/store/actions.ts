@@ -9,14 +9,14 @@ const dataProducts= await getProducts();
 	};
 };
 
-export const GetProductsFavorite = (payload: any) => {
+export const GetShoppingCartItems = (payload: any) => {
 	return {
 		action: 'GetProductsFavorite',
 		payload: payload,
 	};
 };
 
-export const SetProductsFromFavorite = (payload: any) => {
+export const SaveShoppingCartItem = (payload: any) => {
 	return {
 		action: 'SetProductsFromFavorite',
 		payload: payload,

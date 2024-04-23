@@ -3,7 +3,6 @@ import './screens/dashboard';
 import { AppState } from './types/store';
 import { appState } from './store/index';
 import { addObserver } from './store/index';
-import { Dashboard } from './screens/dashboard';
 
 class AppContainer extends HTMLElement {
 	constructor() {

@@ -1,3 +1,53 @@
-* {
-	background-color: aqua;
+section {
+	width: 300px;
+	max-height: auto;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: #f9f9f9;
+	display: inline-block; /* Para que las cartas aparezcan una al lado de la otra */
+	margin-right: 20px; /* Espacio entre cada carta */
+	vertical-align: top; /* Alineación superior para evitar espacios vacíos debajo */
+	box-sizing: border-box; /* Incluye el borde y el relleno en el ancho y la altura */
+	overflow: hidden; /* Para evitar que el contenido desborde la carta */
+}
+
+img {
+	max-width: auto;
+	max-height: 300px;
+	display: block;
+	margin-bottom: 15px;
+}
+
+h1 {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+h2,
+h3 {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+p {
+	font-size: 14px;
+	line-height: 1.5;
+	margin-bottom: 15px;
+}
+
+button.shopping {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button.shopping:hover {
+	background-color: #0056b3;
 }

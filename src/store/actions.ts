@@ -1,13 +1,24 @@
-export const changeBackgroud = (payload: any) => {
-	return {
-		action: 'changeBackgroud',
+import { getProducts } from "../services/getProducts";
+import { Observer, AppState, SomeActions, XAction, Actions } from "../types/store";
+
+export const GetProducts = async(): Promise<getProducts> => {
+const dataProducts= await getProducts();
+  return {
+		action: GetProducts,
 		payload: payload,
 	};
 };
 
-export const navigate = (screen: any) => {
+export const GetProductsFavorite = (payload: any) => {
 	return {
-		action: 'navigate',
-		payload: screen,
+		action: 'GetProductsFavorite',
+		payload: payload,
+	};
+};
+
+export const SetProductsFromFavorite = (payload: any) => {
+	return {
+		action: 'SetProductsFromFavorite',
+		payload: payload,
 	};
 };

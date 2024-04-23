@@ -56,9 +56,9 @@ export default class Product extends HTMLElement {
   <img
    src='${this.image}'></img>
   <h1>${this.utitle}</h1>
-	<h2>${this.price}</h2>
-	<h3>${this.rating}</h3>
-	<h3>${this.category}</h3>
+	<h2>price: $ ${this.price}</h2>
+	<h3>rating: ${this.rating}</h3>
+	<h3>category: ${this.category}</h3>
 	<p>${this.description}</p>
   <button class='shopping'>Add to Shopping Cart</button>
   </section>
@@ -71,14 +71,3 @@ export default class Product extends HTMLElement {
 }
 
 customElements.define('my-product', Product);
-
-
-//this.uid = newValue ? Number(newValue) : undefined;
-//break;
-
-//case AttributeProduct.uid:
-//this.price = newValue ? Number(newValue) : undefined;
-//break;
-//case AttributeProduct.uid:
-//this.rating = newValue ? Number(newValue) : undefined;
-//break;

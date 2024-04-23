@@ -4,7 +4,7 @@ import '../components/export';
 import { ApiTypeProduct } from '../types/products';
 import styles from './styles.css';
 
-class Dashboard extends HTMLElement {
+export class Dashboard extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -17,7 +17,10 @@ class Dashboard extends HTMLElement {
 	}
 
 	render(data: any) {
-		if (this.shadowRoot) this.shadowRoot.innerHTML = ``;
+		if (this.shadowRoot) {
+      this.shadowRoot.innerHTML = ``;
+    }
+
 		data.forEach((product: ApiTypeProduct) => {
 			const card = this.ownerDocument.createElement('my-product');
 			card.setAttribute(AttributeProduct.image, product.image);
@@ -26,6 +29,7 @@ class Dashboard extends HTMLElement {
 			card.setAttribute(AttributeProduct.description, product.description);
 			card.setAttribute(AttributeProduct.price, product.price);
 			card.setAttribute(AttributeProduct.rating, product.rating.rate);
+      this.shadowRoot?.appendChild(card);
 		});
 		const cssDashboard = this.ownerDocument.createElement('style');
 		cssDashboard.innerHTML = styles;

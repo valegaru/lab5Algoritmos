@@ -1,3 +1,5 @@
+import styles from './ShoppingCartItems.css';
+
 export enum AttributeItem {
 	'image' = 'image',
 	'utitle' = 'utitle',
@@ -38,11 +40,16 @@ export default class Item extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
+      <section>
     <img src='${this.image}'></img>
     <h2>${this.utitle}</h2>
-    <p> <b>${this.price}</b></p>
+    <p> <b>price: $${this.price}</b></p>
+    </section>
     `;
 		}
+		const cssItem = this.ownerDocument.createElement('style');
+		cssItem.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssItem);
 	}
 }
 

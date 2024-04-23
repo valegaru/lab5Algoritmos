@@ -1,5 +1,6 @@
 import './components/export';
 import './screens/dashboard';
+import './screens/ShoppingCart';
 import { AppState } from './types/store';
 import { appState } from './store/index';
 import { addObserver } from './store/index';

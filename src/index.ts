@@ -1,7 +1,8 @@
 import './components/export';
 import './screens/dashboard';
 import { AppState } from './types/store';
-import { addObserver, appState } from './store/index';
+import { appState } from './store/index';
+import { addObserver } from './store/index';
 
 class AppContainer extends HTMLElement {
 	constructor() {
@@ -15,8 +16,14 @@ class AppContainer extends HTMLElement {
 	}
 
 	render() {
+		if (this.shadowRoot) this.shadowRoot.innerHTML = '';
 		switch (appState.screen) {
-			case 'dashboard':
+			case 'SHOPPINGCART':
+				const shoppingcart = this.ownerDocument.createElement('app-cart');
+				this.shadowRoot?.appendChild(shoppingcart);
+				break;
+
+			case 'DASHBOARD':
 				const dashboard = this.ownerDocument.createElement('app-dashboard');
 				this.shadowRoot?.appendChild(dashboard);
 				break;
@@ -24,9 +31,6 @@ class AppContainer extends HTMLElement {
 			default:
 				break;
 		}
-		const something = this.ownerDocument.createElement('div');
-		this.shadowRoot?.appendChild(something);
 	}
 }
-
 customElements.define('app-container', AppContainer);

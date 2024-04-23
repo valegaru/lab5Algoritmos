@@ -1,32 +1,21 @@
-import Storage, { PersistanceKeys } from "../utils/storage";
-import { Actions, AppState, Observer } from "../types/store";
-import { reducer } from "./reducer";
+import Storage, { PersistanceKeys } from '../utils/storage';
+import { Actions, AppState, Observer } from '../types/store';
+import { reducer } from './reducer';
 
-const emptyState: AppState = {
-  something: {},
+export let appState = {
+	screen: 'SHOPPINGCART',
+	background: 'red',
 };
 
-export let appState = Storage.get<AppState>({
-  key: PersistanceKeys.STORE,
-  defaultValue: emptyState,
-});
+//De aquí hacia abajo no se lo aprendan de memoria, siempre va a estar ahí el archivo, esto es configuración
+let observers: any = [];
 
-let observers: Observer[] = [];
-
-const persistStore = (state: AppState) =>
-  Storage.set({ key: PersistanceKeys.STORE, value: state });
-
-const notifyObservers = () => observers.forEach((o) => o.render());
-
-export const dispatch = (action: Actions) => {
-  const clone = JSON.parse(JSON.stringify(appState));
-  const newState = reducer(action, clone);
-  appState = newState;
-
-  persistStore(newState);
-  notifyObservers();
+export const dispatch = (action: any) => {
+	const clone = JSON.parse(JSON.stringify(appState));
+	appState = reducer(action, clone);
+	observers.forEach((o: any) => o.render());
 };
 
-export const addObserver = (ref: Observer) => {
-  observers = [...observers, ref];
+export const addObserver = (ref: any) => {
+	observers = [...observers, ref];
 };

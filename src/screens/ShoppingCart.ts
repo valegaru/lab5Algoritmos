@@ -13,23 +13,26 @@ class ShoppingCart extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		const data = await getProducts();
-		console.log(data);
-		this.render(data);
+		//obtiene la lista shoppingCart con los items guardados
+		const storedCart = localStorage.getItem('shoppingCart');
+		if (storedCart) {
+			const data = JSON.parse(storedCart);
+			this.render(data);
+		}
 	}
 
-	render(data: any) {
-		if (this.shadowRoot) this.shadowRoot.innerHTML = ``;
+	render(data: any[]) {
+		if (this.shadowRoot) this.shadowRoot.innerHTML = `  <h1>Shopping Cart</h1>`;
 
-		data.forEach((product: ApiTypeProduct) => {
-			const item = this.ownerDocument.createElement('my-item');
-			item.setAttribute(AttributeItem.utitle, product.title);
-			item.setAttribute(AttributeItem.image, product.image);
-			item.setAttribute(AttributeItem.price, product.price);
-			this.shadowRoot?.appendChild(item);
+		data.forEach((item: any) => {
+			const newItem = this.ownerDocument.createElement('my-item');
+			newItem.setAttribute(AttributeItem.utitle, item.utitle);
+			newItem.setAttribute(AttributeItem.image, item.image);
+			newItem.setAttribute(AttributeItem.price, item.price);
+			this.shadowRoot?.appendChild(newItem);
 		});
 
-		const cssCart = this.ownerDocument.createElement('styles');
+		const cssCart = this.ownerDocument.createElement('style');
 		cssCart.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssCart);
 	}

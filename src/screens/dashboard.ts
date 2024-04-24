@@ -11,7 +11,7 @@ export class Dashboard extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		//lo renderiza sin pasar por el appState
+    //lo renderiza sin pasar por el appState
 		const data = await getProducts();
 		console.log(data);
 		this.render(data);
@@ -19,9 +19,8 @@ export class Dashboard extends HTMLElement {
 
 	render(data: any) {
 		if (this.shadowRoot) {
-			this.shadowRoot.innerHTML = `<section id="shoppingcart">
-      <app-cart></app-cart>  </section>`;
-		}
+      this.shadowRoot.innerHTML = ``;
+    }
 
 		data.forEach((product: ApiTypeProduct) => {
 			const card = this.ownerDocument.createElement('my-product');
@@ -31,7 +30,7 @@ export class Dashboard extends HTMLElement {
 			card.setAttribute(AttributeProduct.description, product.description);
 			card.setAttribute(AttributeProduct.price, product.price);
 			card.setAttribute(AttributeProduct.rating, product.rating.rate);
-			this.shadowRoot?.appendChild(card);
+      this.shadowRoot?.appendChild(card);
 		});
 		const cssDashboard = this.ownerDocument.createElement('style');
 		cssDashboard.innerHTML = styles;

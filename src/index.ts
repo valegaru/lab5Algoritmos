@@ -19,12 +19,14 @@ class AppContainer extends HTMLElement {
 
 	render() {
 		if (this.shadowRoot) {
-			this.shadowRoot.innerHTML = `
+			this.shadowRoot.innerHTML = `<section id="shoppingcart">
+            <app-cart></app-cart>  </section>
 
 `;
 			//renderiza el dashboard
 			const dashboard = this.ownerDocument.createElement('app-dashboard');
 			this.shadowRoot?.appendChild(dashboard);
+			//css
 			const cssContainer = this.ownerDocument.createElement('style');
 			cssContainer.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssContainer);

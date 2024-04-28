@@ -1,11 +1,12 @@
-import { getProducts } from "../services/getProducts";
-import { Observer, AppState, SomeActions, XAction, Actions } from "../types/store";
+import { getProducts } from '../services/getProducts';
+import { GetFavoritesAction, GetProductsAction, ProductsActions, FavoritesActions } from '../types/store';
+import { Observer, AppState, Actions } from '../types/store';
 
-export const GetProducts = async(): Promise<getProducts> => {
-const dataProducts= await getProducts();
-  return {
-		action: GetProducts,
-		payload: payload,
+export const GetProducts = async (): Promise<GetProductsAction> => {
+	const dataProducts = await getProducts();
+	return {
+		action: ProductsActions.GET,
+		payload: dataProducts,
 	};
 };
 
@@ -18,7 +19,7 @@ export const GetShoppingCartItems = (payload: any) => {
 
 export const SaveShoppingCartItem = (payload: any) => {
 	return {
-		action: 'SetProductsFromFavorite',
-		payload: payload,
+		action: FavoritesActions.GET2,
+		payload,
 	};
 };

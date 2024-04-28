@@ -1,16 +1,25 @@
-export const reducer = (currentAction: any, currentState: any) => {
+import { Actions, AppState, FavoritesActions, ProductsActions } from '../types/store';
+import { appState } from './index';
+
+export const reducer = (currentAction: Actions, currentState: AppState): AppState => {
 	//Payload: es el valor que queremos cambiar o asignar
 	const { action, payload } = currentAction;
+	console.log(currentState.favorites);
 
 	switch (action) {
-		case 'navigate':
-			currentState.screen = payload;
-			break;
+		case ProductsActions.GET:
+			return {
+				...currentState,
+				products: payload,
+			};
 
-		case 'changeBackground':
-			currentState.background = payload;
-			break;
+		case FavoritesActions.GET2:
+			return {
+				...currentState,
+				favorites: [...currentState.favorites, payload],
+			};
+
+		default:
+			return currentState;
 	}
-
-	return currentState;
-}
+};

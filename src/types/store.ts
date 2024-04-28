@@ -1,16 +1,29 @@
+import { ApiTypeProduct } from './products';
+import { ApiTypeFavorites } from './favorites';
+
 export type Observer = { render: () => void } & HTMLElement;
 
 export type AppState = {
-  something: {};
+	products: ApiTypeProduct[];
+	favorites: ApiTypeFavorites[];
 };
 
-export enum SomeActions {
-  "X" = "X",
+export enum ProductsActions {
+	'GET' = 'GET',
 }
 
-export interface XAction {
-  action: SomeActions.X;
-  payload: Pick<AppState, "something">;
+export interface GetProductsAction {
+	action: ProductsActions.GET;
+	payload: ApiTypeProduct[];
 }
 
-export type Actions = XAction;
+export enum FavoritesActions {
+	'GET2' = 'GET2',
+}
+
+export interface GetFavoritesAction {
+	action: FavoritesActions.GET2;
+	payload: ApiTypeFavorites;
+}
+
+export type Actions = GetFavoritesAction | GetProductsAction;

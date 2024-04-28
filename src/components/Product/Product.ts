@@ -1,6 +1,8 @@
 import styles from './Product.css';
 import { AttributeItem } from '../ShoppingCartItems/ShoppingCartItems';
 import '../ShoppingCartItems/ShoppingCartItems';
+import { dispatch } from '../../store/index';
+import { SaveShoppingCartItem } from '../../store/actions';
 
 export enum AttributeProduct {
 	'uid' = 'uid',
@@ -65,11 +67,11 @@ export default class Product extends HTMLElement {
 	<button class='shopping'>Add to Shopping Cart</button>
   </section>
 `;
-//listener en el boton, el click desencadena la funcionaddToShoppingCart
+			//listener en el boton, el click desencadena la funcionaddToShoppingCart
 			const shoppingButton = this.shadowRoot.querySelector('.shopping');
 			if (shoppingButton) {
 				shoppingButton.addEventListener('click', () => {
-					this.addToShoppingCart();
+					dispatch(SaveShoppingCartItem({ utitle: this.utitle, image: this.image, price: this.price }));
 				});
 			}
 		}
@@ -78,28 +80,27 @@ export default class Product extends HTMLElement {
 		this.shadowRoot?.appendChild(cssProduct);
 	}
 
-	addToShoppingCart() {
-		// Al hundir el boton, crear un nuevo ítem con los datos del producto actual
-		const newItem = document.createElement('my-item') as HTMLElement;
-		newItem.setAttribute(AttributeItem.image, this.image || '');
-		newItem.setAttribute(AttributeItem.utitle, this.utitle || '');
-		newItem.setAttribute(AttributeItem.price, this.price || '');
+	// addToShoppingCart() {
+	// 	// Al hundir el boton, crear un nuevo ítem con los datos del producto actual
+	// 	const newItem = document.createElement('my-item') as HTMLElement;
+	// 	newItem.setAttribute(AttributeItem.image, this.image || '');
+	// 	newItem.setAttribute(AttributeItem.utitle, this.utitle || '');
+	// 	newItem.setAttribute(AttributeItem.price, this.price || '');
 
-		// Agregar el nuevo ítem a la lista de ShoppingCart
-		const shoppingCart = document.querySelector('.shopping-cart');
-		if (shoppingCart) {
-			shoppingCart.appendChild(newItem);
-		}
+	// 	// Agregar el nuevo ítem a la lista de ShoppingCart
+	// 	const shoppingCart = document.querySelector('.shopping-cart');
+	// 	if (shoppingCart) {
+	// 		shoppingCart.appendChild(newItem);
+	// 	}
 
-		// Como lo paso al appState antes de  al local storage??
-		const currentShoppingCart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
-		currentShoppingCart.push({
-			image: this.image,
-			utitle: this.utitle,
-			price: this.price,
-		});
-		localStorage.setItem('shoppingCart', JSON.stringify(currentShoppingCart));
-	}
+	// 	// Como lo paso al appState antes de  al local storage??
+	// 	const currentShoppingCart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+	// 	currentShoppingCart.push({
+	// 		image: this.image,
+	// 		utitle: this.utitle,
+	// 		price: this.price,
+	// 	});
+	// 	localStorage.setItem('shoppingCart', JSON.stringify(currentShoppingCart));
 }
 
 customElements.define('my-product', Product);

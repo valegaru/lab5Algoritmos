@@ -2,20 +2,19 @@ import Storage, { PersistanceKeys } from '../utils/storage';
 import { Actions, AppState, Observer } from '../types/store';
 import { reducer } from './reducer';
 
-export let appState = {
-	screen: 'SHOPPINGCART',
-	background: 'red',
+export let appState: AppState = {
+	products: [],
+	favorites: [],
 };
 
-//De aquí hacia abajo no se lo aprendan de memoria, siempre va a estar ahí el archivo, esto es configuración
-let observers: any = [];
+let observers: Observer[] = [];
 
-export const dispatch = (action: any) => {
+export const dispatch = (action: Actions) => {
 	const clone = JSON.parse(JSON.stringify(appState));
 	appState = reducer(action, clone);
-	observers.forEach((o: any) => o.render());
+	observers.forEach((o) => o.render());
 };
 
-export const addObserver = (ref: any) => {
+export const addObserver = (ref: Observer) => {
 	observers = [...observers, ref];
 };
